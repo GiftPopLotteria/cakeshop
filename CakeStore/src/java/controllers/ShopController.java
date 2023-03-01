@@ -55,7 +55,7 @@ public class ShopController extends HttpServlet {
                             List<Products> list = pf.getProductsByName(search);
                             request.setAttribute("list", list);
                         } else {
-                            List<Products> list = pf.getProductsByNameAndCategory(search, category);
+                            List<Products> list = pf.getProductsByNameAndCategory(category, search);
                             request.setAttribute("list", list);
                         }
                     }

@@ -51,13 +51,13 @@
                     </form>
 
                     <!------ Login Form -------- -->
-                    <form class="login" action="" method="get">
+                    <form class="login" action="<c:url value="/user/login_handler.do"/>" method="post">
 
                         <div class="formGroup">
-                            <input type="email" placeholder="Email ID" name="email" required autocomplete="off">
+                            <input type="email" placeholder="Email " name="name" required autocomplete="off" class="form-control">
                         </div>
                         <div class="formGroup">
-                            <input type="password" id="password" placeholder="Password" required autocomplete="off">
+                            <input type="password" name="phone" id="password" placeholder="Password" required autocomplete="off" class="form-control">
 
                         </div>
                         <div class="checkBox">
@@ -65,7 +65,8 @@
                             <span class="text">Keep me signed in on this device</span>
                         </div>
                         <div class="formGroup">
-                            <button type="button" class="btn2">REGISTER</button>
+                            <button type="submit" name="op" value="login" class="btn2"> LOGIN </button>
+                            <button type="submit" name="op" value="cancel" class="btn2"> CANCEL </button>
                         </div>
 
                     </form>

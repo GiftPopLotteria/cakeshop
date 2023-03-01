@@ -114,7 +114,7 @@ public class ProductsFacade {
         //Tạo connection để kết nối vào DBMS
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM Products WHERE name like ? and category= ?");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM Products WHERE name like ? and category = ?");
         stm.setString(1, "%" + search + "%");
         stm.setString(2, category);
         //Thực thi lệnh sql

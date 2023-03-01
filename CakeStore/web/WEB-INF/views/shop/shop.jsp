@@ -10,7 +10,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__links">
-                    <a href="./index.html">Home</a>
+                    <a href="<c:url value="/cakestore/index.do"/>">Home</a>
                     <span>Shop</span>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-7 col-md-7">
                     <div class="shop__option__search">
-                        <form action="#">
+                        <form action="<c:url value="/shop/shop.do"/>" method="post">
                             <select name="category">
                                 <option value="None">None</option>
                                 <c:forEach var="category" items="${category}">
