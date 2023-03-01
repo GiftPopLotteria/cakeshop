@@ -29,15 +29,11 @@
                         <form action="#">
                             <select name="category">
                                 <option value="None">None</option>
-                                <c:forEach var="${categories}" items="${list}">
-                                    <option value="${category}" 
-                                            <c:if test="${category == param.category}">
-                                                selected
-                                            </c:if>
-                                            >${category}</option>
+                                <c:forEach var="category" items="${category}">
+                                    <option value="${category}" ${category==param.category?"selected":""}>${category}</option>
                                 </c:forEach>
                             </select>
-                            <input type="text" name="search" placeholder="Search">
+                            <input type="text" name="search" placeholder="Search" value="${param.search}">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>

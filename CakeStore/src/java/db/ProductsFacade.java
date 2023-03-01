@@ -102,7 +102,7 @@ public class ProductsFacade {
         //Tạo đối tượng statement
         Statement stm = con.createStatement();
         //Thực thi lệnh SELECT
-        ResultSet rs = stm.executeQuery("SELECT DISTINCT category FROM products;");
+        ResultSet rs = stm.executeQuery("SELECT DISTINCT category FROM products");
         while (rs.next()) {
             categories.add(rs.getString("category"));
         }
