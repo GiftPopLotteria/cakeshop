@@ -45,15 +45,15 @@ public class CakeStoreController extends HttpServlet {
         switch (action) {
             case "index":
                 try {
-                    List<Products> listcupcake = pf.select("cupcake");
+                    List<Products> listcupcake = pf.getProductWithCategory("cupcake");
                     request.setAttribute("listcupcake", listcupcake);
-                    List<Products> listbutter = pf.select("butter");
+                    List<Products> listbutter = pf.getProductWithCategory("butter");
                     request.setAttribute("listbutter", listbutter);
-                    List<Products> listred_velvet = pf.select("red_velvet");
+                    List<Products> listred_velvet = pf.getProductWithCategory("red_velvet");
                     request.setAttribute("listred_velvet", listred_velvet);
-                    List<Products> listbiscuit = pf.select("biscuit");
+                    List<Products> listbiscuit = pf.getProductWithCategory("biscuit");
                     request.setAttribute("listbiscuit", listbiscuit);
-                    List<Products> listdonut = pf.select("donut");
+                    List<Products> listdonut = pf.getProductWithCategory("donut");
                     request.setAttribute("listdonut", listdonut);
                     request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 } catch (SQLException ex) {
@@ -76,6 +76,7 @@ public class CakeStoreController extends HttpServlet {
                 request.setAttribute("controller", "error");
                 request.setAttribute("action", "error");
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+                break;
 
         }
     }

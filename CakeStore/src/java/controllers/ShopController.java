@@ -11,8 +11,7 @@ import entity.Products;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author vuhai
  */
-@WebServlet(name = "DetailController", urlPatterns = {"/detail"})
-public class DetailController extends HttpServlet {
+@WebServlet(name = "ShopController", urlPatterns = {"/shop"})
+public class ShopController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,15 +39,26 @@ public class DetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        String pid = request.getParameter("pid");
+        String search = request.getParameter("search");
+        String category = request.getParameter("category");
         ProductsFacade pf = new ProductsFacade();
         switch (action) {
-            case "detail":
+            case "shop":
                 try {
-                    //Tạo connection để kết nối vào DBMS
-                    Connection con = DBContext.getConnection();
-                    Products p = pf.getProductById(Integer.parseInt(pid));
-                    request.setAttribute("detail", p);
+                    List<String> categories = pf.getCategory();
+                    request.setAttribute("category", categories);
+                    if (search == null) {
+                        List<Products> list = pf.getAllProducts();
+                        request.setAttribute("list", list);
+                    } else {
+                        if (category.equals("None")) {
+                            List<Products> list = pf.getProductsByName(search);
+                            request.setAttribute("list", list);
+                        } else {
+                            List<Products> list = pf.getProductsByNameAndCategory(search, category);
+                            request.setAttribute("list", list);
+                        }
+                    }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
