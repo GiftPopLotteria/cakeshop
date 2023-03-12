@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__text">
-                    <h2>Shop</h2>
+                    <h2>${index}</h2>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-7 col-md-7">
                     <div class="shop__option__search">
-                        <form action="<c:url value="/shop/shop.do"/>" method="post">
+                        <form action="<c:url value="/shop/shop.do?"/>">
                             <select name="category">
                                 <option value="None">None</option>
                                 <c:forEach var="category" items="${category}">
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="row">
-            <c:forEach var="Products" items="${list}">
+            <c:forEach var="Products" items="${list}" begin="0" end="7">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="${Products.image}">
@@ -76,10 +76,10 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="shop__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><span class="arrow_carrot-right"></span></a>
+                        <c:forEach begin="1" end="${end}" var="i">
+                            <a href="#">${i}</a>
+                        </c:forEach>
+                        <a href="#">></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">

@@ -42,14 +42,26 @@ public class ShopController extends HttpServlet {
         String search = request.getParameter("search");
         String category = request.getParameter("category");
         ProductsFacade pf = new ProductsFacade();
+        int pageSize = 8;
+        int endPage = 0;
+        String index = request.getParameter("index");
+        if (index == null) {
+            index = "2";
+        }
         switch (action) {
             case "shop":
                 try {
                     List<String> categories = pf.getCategory();
                     request.setAttribute("category", categories);
-                    if (search == null) {
+                    if (search.equals("")) {
                         List<Products> list = pf.getAllProducts();
-                        request.setAttribute("list", list);
+                        int count = pf.getCountDefault();
+                        endPage = count / pageSize;
+                        if (count % pageSize != 0) {
+                            endPage++;
+                        }
+                        List<Products> listGetAll = pf.PageNotSearch(Integer.parseInt(index));
+                        request.setAttribute("list", listGetAll);
                     } else {
                         if (category.equals("None")) {
                             List<Products> list = pf.getProductsByName(search);
@@ -62,6 +74,7 @@ public class ShopController extends HttpServlet {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
+                request.setAttribute("end", endPage);
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
             default:

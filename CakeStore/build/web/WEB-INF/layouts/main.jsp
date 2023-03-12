@@ -48,7 +48,7 @@
         <div class="offcanvas-menu-wrapper">
             <div class="offcanvas__cart">
                 <div class="offcanvas__cart__links">
-                    <a href="" class="search-switch"><img src="<c:url value="/img/icon/search.png"/>" alt=""></a>
+                    <a href="<c:url value="/shop/shop.do?"/>" class="search-switch"><img src="<c:url value="/img/icon/search.png"/>" alt=""></a>
                     <a href=""><img src="<c:url value="/img/icon/heart.png"/>" alt=""></a>
                 </div>
                 <div class="offcanvas__cart__item">

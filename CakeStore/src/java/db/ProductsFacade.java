@@ -95,6 +95,46 @@ public class ProductsFacade {
         return list;
     }
 
+    public int getCountDefault() throws SQLException {
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng statement
+        Statement stm = con.createStatement();
+        //Thực thi lệnh SELECT
+        ResultSet rs = stm.executeQuery("select count(*) from Products");
+        while (rs.next()) {
+            return rs.getInt(1);
+        }
+        return 0;
+    }
+
+    public List<Products> PageNotSearch(int index) throws SQLException {
+        List<Products> list = null;
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+        PreparedStatement stm = con.prepareStatement(""
+                + "with x as (select ROW_NUMBER()over (order by id asc) as row,* from Products)\n"
+                + "select * from x where row between ?*8-7 and ?*8");
+        stm.setInt(1, index);
+        stm.setInt(2, index);
+        //Thực thi lệnh sql
+        ResultSet rs = stm.executeQuery();
+        //Load dữ liệu vào đối tượng toy nếu có
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Products products = new Products();
+            products.setId(rs.getInt("id"));
+            products.setName(rs.getString("name"));
+            products.setPrice(rs.getDouble("price"));
+            products.setCategory(rs.getString("category"));
+            products.setImage(rs.getString("image"));
+            list.add(products);
+        }
+        con.close();
+        return list;
+    }
+
     public List<String> getCategory() throws SQLException {
         List<String> categories = new ArrayList<String>();
         //Tạo connection để kết nối vào DBMS
