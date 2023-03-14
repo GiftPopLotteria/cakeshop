@@ -1549,6 +1549,7 @@ ol {
     position: relative;
     top: 2px;
 }
+
 .shop__pagination a:hover {
     background: #000000;
     color: #ffffff;

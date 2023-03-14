@@ -227,7 +227,7 @@
     });
 
 
-
+//Home 
     $(".product__details__thumb").niceScroll({
         cursorborder: "",
         cursorcolor: "rgba(0, 0, 0, 0.5)",
@@ -272,6 +272,41 @@
         $('#biscuit').hide();
         $('#donut').show();
     });
+
+//Shop
+    //Sort
+    $(document).ready(function () {
+        $(".shop__option__right select").change(function () {
+            var selectedOption = $(this).val();
+            var url = window.location.href;
+            var newUrl = "";
+            if (selectedOption === "name") {
+                newUrl = updateUrlParam(url, "sort", "name");
+            } else if (selectedOption === "id") {
+                newUrl = updateUrlParam(url, "sort", "id");
+            } else if (selectedOption === "price") {
+                newUrl = updateUrlParam(url, "sort", "price");
+            }
+            // create a form and submit it using POST method
+            var form = $('<form method="POST" action="' + newUrl + '">');
+            $('body').append(form);
+            form.submit();
+        });
+    });
+
+    function updateUrlParam(url, param, value) {
+        var regex = new RegExp("([?&])" + param + "=.*?(&|$)", "i");
+        if (url.match(regex)) {
+            return url.replace(regex, "$1" + param + "=" + value + "$2");
+        } else {
+            if (url.indexOf("?") === -1) {
+                return url + "?" + param + "=" + value;
+            } else {
+                return url + "&" + param + "=" + value;
+            }
+        }
+    }
+
 
 })(jQuery);
 

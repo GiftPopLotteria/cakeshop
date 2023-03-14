@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__text">
-                    <h2>${index}</h2>
+                    <h2>${test}</h2>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -28,12 +28,15 @@
                     <div class="shop__option__search">
                         <form action="<c:url value="/shop/shop.do?"/>">
                             <select name="category">
-                                <option value="None">None</option>
-                                <c:forEach var="category" items="${category}">
+                                <option value="">None</option>
+                                <c:forEach var="category" items="${categories}">
                                     <option value="${category}" ${category==param.category?"selected":""}>${category}</option>
                                 </c:forEach>
                             </select>
                             <input type="text" name="search" placeholder="Search" value="${param.search}">
+                            <div style="display: none">
+                                <select name="index"><option value="1">1</option></select>
+                            </div>
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -42,18 +45,16 @@
                     <div class="shop__option__right">
                         <select>
                             <option value="">Default sorting</option>
-                            <option value="">A to Z</option>
-                            <option value="">1 - 8</option>
-                            <option value="">Name</option>
+                            <option value="name" ${param.sort=="name"?"selected":""}>A to Z</option>
+                            <option value="id"${param.sort=="id"?"selected":""}>1 - 8</option>
+                            <option value="price"${param.sort=="price"?"selected":""}>Price</option>
                         </select>
-                        <a href="#"><i class="fa fa-list"></i></a>
-                        <a href="#"><i class="fa fa-reorder"></i></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <c:forEach var="Products" items="${list}" begin="0" end="7">
+            <c:forEach var="Products" items="${list}">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="${Products.image}">
@@ -77,14 +78,22 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="shop__pagination">
                         <c:forEach begin="1" end="${end}" var="i">
-                            <a href="#">${i}</a>
+                            <a ${i==param.index?'style=" background: #000000; color: #ffffff;"':''} 
+                            href="<c:url value="/shop/shop.do?category=${param.category}&search=${param.search}&index=${i}&sort=${param.sort}"/>">${i}</a>
                         </c:forEach>
-                        <a href="#">></a>
+                        <a href="<c:url value="/shop/shop.do?category=${param.category}&search=${param.search}&index=${param.index*pageSize<=count?param.index+1:param.index}&sort=${param.sort}"/>">></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="shop__last__text">
-                        <p>Showing 1-9 of 10 results</p>
+                        <p>Showing 
+                            ${param.index*pageSize-(pageSize-1)}
+                            -
+                            ${param.index*pageSize<=count?param.index*pageSize:count} 
+                            of 
+                            ${count} 
+                            results
+                        </p>
                     </div>
                 </div>
             </div>
