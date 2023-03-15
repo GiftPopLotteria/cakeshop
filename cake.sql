@@ -2,24 +2,6 @@ set nocount on
 USE master
 GO
 
-if exists (select * from sysdatabases where name='Cake')
-begin
-  raiserror('Dropping existing Cake database ....',0,1)
-  DROP database Cake
-end
-GO
-
-CHECKPOINT
-go
-
-raiserror('Creating Cake database....',0,1)
-go
-   CREATE DATABASE Cake
-GO
-
-CHECKPOINT
-GO
-
 USE Cake
 GO
 set nocount on
@@ -105,6 +87,21 @@ CREATE TABLE Subscription (
 );
 
 GO
+
+-- Create Class table
+raiserror('Creating Table Class....',0,1)
+GO
+
+CREATE TABLE Class (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  name VARCHAR(255) NOT NULL,
+  phone VARCHAR(20) NOT NULL,
+  class VARCHAR(50) NOT NULL,
+  requirement TEXT NULL
+);
+GO
+
+
 -- Populate the Products table
 raiserror('Insert Table Products....',0,1)
 SET IDENTITY_INSERT Products ON

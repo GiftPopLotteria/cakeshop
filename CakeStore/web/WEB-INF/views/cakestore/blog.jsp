@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
     <div class="container">
@@ -9,7 +10,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__links">
-                    <a href="./index.html">Home</a>
+                    <a href="<c:url value="/cakestore/index.do"/>">Home</a>
                     <span>Blog</span>
                 </div>
             </div>
@@ -24,7 +25,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="blog__item">
-                    <div class="blog__item__pic set-bg" data-setbg="img/blog/blog-1.jpg">
+                    <div class="blog__item__pic set-bg" data-setbg="<c:url value="/img/blog/blog-1.jpg"/>">
                         <div class="blog__pic__inner">
                             <div class="label">Recipes</div>
                             <ul>
@@ -43,7 +44,7 @@
                     </div>
                 </div>
                 <div class="blog__item">
-                    <div class="blog__item__pic set-bg" data-setbg="img/blog/blog-2.jpg">
+                    <div class="blog__item__pic set-bg" data-setbg="<c:url value="/img/blog/blog-2.jpg"/>">
                         <div class="blog__pic__inner">
                             <div class="label">Recipes</div>
                             <ul>
@@ -62,7 +63,7 @@
                     </div>
                 </div>
                 <div class="blog__item">
-                    <div class="blog__item__pic set-bg" data-setbg="img/blog/blog-3.jpg">
+                    <div class="blog__item__pic set-bg" data-setbg="<c:url value="/img/blog/blog-3.jpg"/>">
                         <div class="blog__pic__inner">
                             <div class="label">Recipes</div>
                             <ul>
@@ -81,7 +82,7 @@
                     </div>
                 </div>
                 <div class="blog__item">
-                    <div class="blog__item__pic set-bg" data-setbg="img/blog/blog-4.jpg">
+                    <div class="blog__item__pic set-bg" data-setbg="<c:url value="/img/blog/blog-4.jpg"/>">
                         <div class="blog__pic__inner">
                             <div class="label">Recipes</div>
                             <ul>
@@ -129,7 +130,7 @@
                         <div class="blog__sidebar__recent">
                             <a href="#" class="blog__sidebar__recent__item">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/br-1.jpg" alt="">
+                                    <img src="<c:url value="/img/blog/br-1.jpg"/>" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h4>Secret To Cooking Vegetables</h4>
@@ -138,7 +139,7 @@
                             </a>
                             <a href="#" class="blog__sidebar__recent__item">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/br-2.jpg" alt="">
+                                    <img src="<c:url value="/img/blog/br-2.jpg"/>" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h4>Bbq Myths Getting You Down</h4>
@@ -147,7 +148,7 @@
                             </a>
                             <a href="#" class="blog__sidebar__recent__item">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/br-3.jpg" alt="">
+                                    <img src="<c:url value="/img/blog/br-3.jpg"/>" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h4>Save Money The Crock Pot Way</h4>
@@ -156,7 +157,7 @@
                             </a>
                             <a href="#" class="blog__sidebar__recent__item">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/br-4.jpg" alt="">
+                                    <img src="<c:url value="/img/blog/br-4.jpg"/>" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h4>Grilling Tips For The Dog Days Of Summer</h4>
@@ -165,7 +166,7 @@
                             </a>
                             <a href="#" class="blog__sidebar__recent__item">
                                 <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/br-5.jpg" alt="">
+                                    <img src="<c:url value="/img/blog/br-5.jpg"/>" alt="">
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h4>Barbeque Techniques Two Methods To Consider</h4>

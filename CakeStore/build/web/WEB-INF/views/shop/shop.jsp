@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="breadcrumb__text">
-                    <h2>${test}</h2>
+                    <h2>Shop</h2>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -66,7 +66,7 @@
                             <h6><a href="#">${Products.name}</a></h6>
                             <div class="product__item__price">$ ${Products.price}</div>
                             <div class="cart_add">
-                                <a href="<c:url value="/detail/detail.do?pid=${products.id}"/>">Add to cart</a>
+                                <a href="<c:url value="/detail/detail.do?pid=${Products.id}"/>">Add to cart</a>
                             </div>
                         </div>
                     </div>

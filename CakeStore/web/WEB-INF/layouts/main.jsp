@@ -48,7 +48,7 @@
         <div class="offcanvas-menu-wrapper">
             <div class="offcanvas__cart">
                 <div class="offcanvas__cart__links">
-                    <a href="<c:url value="/shop/shop.do?"/>" class="search-switch"><img src="<c:url value="/img/icon/search.png"/>" alt=""></a>
+                    <a class="search-switch"><img src="<c:url value="/img/icon/search.png"/>" alt=""></a>
                     <a href=""><img src="<c:url value="/img/icon/heart.png"/>" alt=""></a>
                 </div>
                 <div class="offcanvas__cart__item">
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="offcanvas__logo">
-                <a href="./index.html"><img src="<c:url value="/img/logo.png"/>" alt=""></a>
+                <a href="<c:url value="/cakestore/index.do"/>"><img src="<c:url value="/img/logo.png"/>" alt=""></a>
             </div>
             <div id="mobile-menu-wrap"></div>
             <div class="offcanvas__option">
@@ -105,7 +105,7 @@
                                     </ul>
                                 </div>
                                 <div class="header__logo">
-                                    <a href="./index.html"><img src="<c:url value="/img/logo.png" />" alt=""></a>
+                                    <a href="<c:url value="/cakestore/index.do"/>"><img src="<c:url value="/img/logo.png" />" alt=""></a>
                                 </div>
                                 <div class="header__top__right">
                                     <div class="header__top__right__links">
@@ -130,19 +130,18 @@
                             <ul>
                                 <li><a href="<c:url value="/cakestore/index.do"/>">Home</a></li>
                                 <li><a href="<c:url value="/cakestore/about.do"/>">About</a></li>
-                                <li><a href="<c:url value="/shop/shop.do"/>">Shop</a></li>
+                                <li><a href="<c:url value="/shop/shop.do?index=1"/>">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="./shop-details.html">Shop Details</a></li>
                                         <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                                         <li><a href="./checkout.html">Check Out</a></li>
                                         <li><a href="./wisslist.html">Wisslist</a></li>
-                                        <li><a href="./Class.html">Class</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
+                                        <li><a href="<c:url value="/cakestore/class.do"/>">Class</a></li>
+                                        <li><a href="<c:url value="/cakestore/blog-details.do"/>">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="./blog.html">Blog</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
+                                <li><a href="<c:url value="/cakestore/blog.do"/>">Blog</a></li>
+                                <li><a href="<c:url value="/cakestore/contact.do"/>">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -225,7 +224,9 @@
             <div class="h-100 d-flex align-items-center justify-content-center">
                 <div class="search-close-switch">+</div>
                 <form class="search-model-form" action="<c:url value="/shop/shop.do"/>" method="get">
-                    <input type="text" name="search" id="search-input" placeholder="Search here.....">
+                    <input type="text" name="search" id="search-input" placeholder="Search here.....">      
+                    <input type="hidden" name="category">        
+                    <input type="hidden" name="index" value="1">
                 </form>
             </div>
         </div>

@@ -42,7 +42,7 @@ public class ShopController extends HttpServlet {
         String search = request.getParameter("search");
         String category = request.getParameter("category");
         String sort = request.getParameter("sort");
-        if (sort == null) {sort = "name";} 
+        if (sort == null||sort=="") {sort = "name";} 
         ProductsFacade pf = new ProductsFacade();
         String index = request.getParameter("index");
         if (search == null) {search = category="";index="1";}        
