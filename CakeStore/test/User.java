@@ -1,31 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entity;
+
 
 /**
  *
- * @author vuhai
+ * @author _viet.quangg
  */
 public class User {
-
     private String id;
     private String name;
     private String email;
     private String password;
-    private String roleId;
 
     public User() {
     }
 
-    public User(String id, String name, String email, String password, String roleId) {
+    public User(String id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.roleId = roleId;
     }
 
     public String getId() {
@@ -59,14 +55,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
-
+    
 }

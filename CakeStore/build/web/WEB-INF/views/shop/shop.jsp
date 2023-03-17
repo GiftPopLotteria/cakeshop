@@ -63,10 +63,10 @@
                             </div>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">${Products.name}</a></h6>
-                            <div class="product__item__price">$ ${Products.price}</div>
+                            <h6><a href="<c:url value="/detail/detail.do?pid=${Products.id}&currency=${param.currency}"/>">${Products.name}</a></h6>
+                            <div class="product__item__price">${param.currency=="vnd"?Products.price*23580:Products.price} ${param.currency=="vnd"?"VND":"$"}</div>
                             <div class="cart_add">
-                                <a href="<c:url value="/detail/detail.do?pid=${Products.id}"/>">Add to cart</a>
+                                <a href="<c:url value="/detail/detail.do?pid=${Products.id}&currency=${param.currency}"/>">Add to cart</a>
                             </div>
                         </div>
                     </div>

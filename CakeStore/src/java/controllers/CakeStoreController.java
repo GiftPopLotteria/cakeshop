@@ -41,29 +41,9 @@ public class CakeStoreController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        ProductsFacade pf = new ProductsFacade();
         switch (action) {
             case "index":
-                try {
-                    List<Products> listcupcake = pf.getProductWithCategory("cupcake");
-                    request.setAttribute("listcupcake", listcupcake);
-                    List<Products> listbutter = pf.getProductWithCategory("butter");
-                    request.setAttribute("listbutter", listbutter);
-                    List<Products> listred_velvet = pf.getProductWithCategory("red_velvet");
-                    request.setAttribute("listred_velvet", listred_velvet);
-                    List<Products> listbiscuit = pf.getProductWithCategory("biscuit");
-                    request.setAttribute("listbiscuit", listbiscuit);
-                    List<Products> listdonut = pf.getProductWithCategory("donut");
-                    request.setAttribute("listdonut", listdonut);
-                    request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
-                } catch (SQLException ex) {
-                    //Hien trang thong bao loi
-                    ex.printStackTrace();//in thong bao loi chi tiet cho developer
-                    request.setAttribute("message", ex.getMessage());
-                    request.setAttribute("controller", "error");
-                    request.setAttribute("action", "error");
-                    request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
-                }
+                list(request, response);
                 break;
             case "about":
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
@@ -90,6 +70,31 @@ public class CakeStoreController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
 
+        }
+    }
+
+    protected void list(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        ProductsFacade pf = new ProductsFacade();
+        try {
+            List<Products> listcupcake = pf.getProductWithCategory("cupcake");
+            request.setAttribute("listcupcake", listcupcake);
+            List<Products> listbutter = pf.getProductWithCategory("butter");
+            request.setAttribute("listbutter", listbutter);
+            List<Products> listred_velvet = pf.getProductWithCategory("red_velvet");
+            request.setAttribute("listred_velvet", listred_velvet);
+            List<Products> listbiscuit = pf.getProductWithCategory("biscuit");
+            request.setAttribute("listbiscuit", listbiscuit);
+            List<Products> listdonut = pf.getProductWithCategory("donut");
+            request.setAttribute("listdonut", listdonut);
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            //Hien trang thong bao loi
+            ex.printStackTrace();//in thong bao loi chi tiet cho developer
+            request.setAttribute("message", ex.getMessage());
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "error");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         }
     }
 

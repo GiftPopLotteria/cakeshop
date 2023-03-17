@@ -307,6 +307,25 @@
         }
     }
 
+    $(document).ready(function () {
+        const form = $('.signUp');
+        const passwordInput = $('#password');
+        const confirmPasswordInput = $('#confirmPassword');
+        const checkBoxInput = $('#checkbox');
+
+        form.submit(function (event) {
+            if (passwordInput.val() !== confirmPasswordInput.val()) {
+                event.preventDefault();
+                alert('Passwords do not match!');
+            }
+
+            if (!checkBoxInput.prop('checked')) {
+                event.preventDefault();
+                alert('Please agree to the terms and conditions.');
+            }
+        });
+    });
+
 
 })(jQuery);
 

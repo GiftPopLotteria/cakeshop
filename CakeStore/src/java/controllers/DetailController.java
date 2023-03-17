@@ -40,19 +40,9 @@ public class DetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        String pid = request.getParameter("pid");
-        ProductsFacade pf = new ProductsFacade();
         switch (action) {
             case "detail":
-                try {
-                    //Tạo connection để kết nối vào DBMS
-                    Connection con = DBContext.getConnection();
-                    Products p = pf.getProductById(Integer.parseInt(pid));
-                    request.setAttribute("detail", p);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+                list(request, response);
                 break;
             default:
                 request.setAttribute("controller", "error");
@@ -60,6 +50,21 @@ public class DetailController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
         }
+    }
+
+    protected void list(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String pid = request.getParameter("pid");
+        ProductsFacade pf = new ProductsFacade();
+        try {
+            //Tạo connection để kết nối vào DBMS
+            Connection con = DBContext.getConnection();
+            Products p = pf.getProductById(Integer.parseInt(pid));
+            request.setAttribute("detail", p);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

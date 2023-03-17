@@ -52,7 +52,7 @@
                     <a href=""><img src="<c:url value="/img/icon/heart.png"/>" alt=""></a>
                 </div>
                 <div class="offcanvas__cart__item">
-                    <a href=""><img src="<c:url value="/img/icon/cart.png"/>" alt=""></a>
+                    <a href="<c:url value="/cart/cart.do"/>"><img src="<c:url value="/img/icon/cart.png"/>" alt=""></a>
                     <div class="cart__price">Cart: <span>$0.00</span></div>
                 </div>
             </div>
@@ -62,16 +62,14 @@
             <div id="mobile-menu-wrap"></div>
             <div class="offcanvas__option">
                 <ul>
-                    <li>USD <span class="arrow_carrot-down"></span>
+                    <li style="text-transform: uppercase;">${param.currency!="vnd"?"usd":"vnd"} <span class="arrow_carrot-down"></span>
                         <ul>
-                            <li>EUR</li>
-                            <li>USD</li>
-                        </ul>
-                    </li>
-                    <li>ENG <span class="arrow_carrot-down"></span>
-                        <ul>
-                            <li>Spanish</li>
-                            <li>ENG</li>
+                            <li>
+                                <a href="<c:url value="/cakestore/index.do?currency=vnd"/>">VND</a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/cakestore/index.do?currency=usd"/>">USD</a>
+                            </li>
                         </ul>
                     </li>
                     <li><a href="#">Sign in</a> <span class="arrow_carrot-down"></span></li>
@@ -89,19 +87,26 @@
                             <div class="header__top__inner">
                                 <div class="header__top__left">
                                     <ul>
-                                        <li>USD <span class="arrow_carrot-down"></span>
+                                        <li style="text-transform: uppercase;">${param.currency!="vnd"?"usd":"vnd"} </span>
                                             <ul>
-                                                <li>EUR</li>
-                                                <li>USD</li>
+                                                <li>
+                                                    <a href="<c:url value="/cakestore/index.do?currency=vnd"/>" style="color: white">VND</a>
+                                                </li>
+                                                <li>
+                                                    <a href="<c:url value="/cakestore/index.do?currency=usd"/>" style="color: white">USD</a>
+                                                </li>
                                             </ul>
                                         </li>
-                                        <li>ENG <span class="arrow_carrot-down"></span>
-                                            <ul>
-                                                <li>Spanish</li>
-                                                <li>ENG</li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="<c:url value="/cakestore/login.do"/>">Sign in</a> <span class="arrow_carrot-down"></span></li>
+                                        <c:if test="${user == null}">
+                                            <li><a href="<c:url value="/user/login.do" />">SIGN IN</a><span class="arrow_carrot-down"></span></li>
+                                            </c:if>
+                                            <c:if test="${user != null}">
+                                            <li><a>Welcome ${user.name} !</a></li>
+                                            <li><a href="<c:url value="/user/logout.do" />">LOG OUT</a></span></li>
+                                            <li><a href="<c:url value="/admin/index.do" />">${user.roleId=="Admin"?"MANAGER":""}</a></li>
+                                        </c:if>
+
+
                                     </ul>
                                 </div>
                                 <div class="header__logo">
@@ -113,7 +118,7 @@
                                         <a href="#"><img src="<c:url value="/img/icon/heart.png"/>" alt=""></a>
                                     </div>
                                     <div class="header__top__right__cart">
-                                        <a href="#"><img src="<c:url value="/img/icon/cart.png"/>" alt=""></a>
+                                        <a href="<c:url value="/cart/cart.do"/>"><img src="<c:url value="/img/icon/cart.png"/>" alt=""></a>
                                         <div class="cart__price">Cart: <span>$0.00</span></div>
                                     </div>
                                 </div>
@@ -130,7 +135,7 @@
                             <ul>
                                 <li><a href="<c:url value="/cakestore/index.do"/>">Home</a></li>
                                 <li><a href="<c:url value="/cakestore/about.do"/>">About</a></li>
-                                <li><a href="<c:url value="/shop/shop.do?index=1"/>">Shop</a></li>
+                                <li><a href="<c:url value="/shop/shop.do?index=1&currency=${param.currency!="vnd"?"usd":"vnd"}"/>">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -226,7 +231,8 @@
                 <form class="search-model-form" action="<c:url value="/shop/shop.do"/>" method="get">
                     <input type="text" name="search" id="search-input" placeholder="Search here.....">      
                     <input type="hidden" name="category">        
-                    <input type="hidden" name="index" value="1">
+                    <input type="hidden" name="index" value="1"> 
+                    <input type="hidden" name="currency" value="${param.currency!="vnd"?"usd":"vnd"}">
                 </form>
             </div>
         </div>

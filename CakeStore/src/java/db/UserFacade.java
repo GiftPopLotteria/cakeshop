@@ -1,40 +1,82 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package db;
 
+import entity.User;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import entity.User;
+import java.sql.SQLException;
 
 /**
  *
- * @author _viet.quangg
+ * @author vuhai
  */
 public class UserFacade {
 
-    public User login(String name, String phone) {
-        String query = "select * FROM Customers\n"
-                + "where name = ?\n"
-                + "and phone= ?";
-        try {
-            Connection con = DBContext.getConnection();
-            PreparedStatement stm = con.prepareStatement(query);
-            stm.setString(1, name);
-            stm.setString(2, phone);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                return new User(rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4));
-            }
-        } catch (Exception e) {
-
+    public User login(String email, String password) throws SQLException {
+        User user = null;
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+        PreparedStatement stm = con.prepareStatement("select * from Users where email = ? and password = ?");
+        stm.setString(1, email);
+        stm.setString(2, password);
+        //Thực thi lệnh sql
+        ResultSet rs = stm.executeQuery();
+        //load du lieu vao doi tuong toy neu co
+        if (rs.next()) {
+            user = new User();
+            user.setId(rs.getString("id"));
+            user.setName(rs.getString("name"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+            user.setRoleId(rs.getString("roleId"));
         }
-        return null;
+        //dong ket net
+        con.close();
+        return user;
+    }
+
+    public User checkExist(String email) throws SQLException {
+        User user = null;
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+        PreparedStatement stm = con.prepareStatement("select * from Users where email = ?");
+        stm.setString(1, email);
+        //Thực thi lệnh sql
+        ResultSet rs = stm.executeQuery();
+        //load du lieu vao doi tuong toy neu co
+        if (rs.next()) {
+            user = new User();
+            user.setId(rs.getString("id"));
+            user.setName(rs.getString("name"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+        }
+        //dong ket net
+        con.close();
+        return user;
+    }
+
+    public void create(String name, String email, String password) throws SQLException, ClassNotFoundException {
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+        PreparedStatement stm = con.prepareStatement("insert Users values(?, ?, ?, ?, ?)");
+        int index = email.indexOf("@");
+        String id = email.substring(0, index);
+        stm.setString(1, id);
+        stm.setString(2, name);
+        stm.setString(3, email);
+        stm.setString(4, password);
+        stm.setString(5, "user");
+
+        //Thực thi lệnh sql
+        int count = stm.executeUpdate();
+        //Đóng kết nối
+        con.close();
     }
 }

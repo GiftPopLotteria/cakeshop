@@ -38,25 +38,9 @@ public class SubscribeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
-        // Get the user's email address from the request
-        String email = request.getParameter("email");
-        // Add the email address to the database
         switch (action) {
             case "subscribe":
-                try {
-                    //Tạo connection để kết nối vào DBMS
-                    Connection con = DBContext.getConnection();
-                    //Tạo đối tượng PreparedStatement
-                    String sql = "INSERT INTO Subscription (email, date_subscribed) VALUES (?, GETDATE())";
-                    PreparedStatement stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                    stm.setString(1, email);
-                    stm.executeUpdate();
-                    stm.close();
-                    con.close();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+                add(request, response);
                 break;
             default:
                 request.setAttribute("controller", "error");
@@ -64,6 +48,25 @@ public class SubscribeController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
         }
+    }
+
+    protected void add(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
+        try {
+            //Tạo connection để kết nối vào DBMS
+            Connection con = DBContext.getConnection();
+            //Tạo đối tượng PreparedStatement
+            String sql = "INSERT INTO Subscription (email, date_subscribed) VALUES (?, GETDATE())";
+            PreparedStatement stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setString(1, email);
+            stm.executeUpdate();
+            stm.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

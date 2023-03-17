@@ -61,7 +61,7 @@
                 <div class="product__details__text">
                     <div class="product__label">${detail.category}</div>
                     <h4>${detail.name}</h4>
-                    <h5>$ ${detail.price}</h5>
+                    <h5>${param.currency=="vnd"?detail.price*23580:detail.price} ${param.currency=="vnd"?"VND":"$"}</h5>
                     <p>${detail.description}</p>
                     <ul>
                         <li>SKU: <span>${detail.id}</span></li>
@@ -74,7 +74,7 @@
                                 <input type="text" value="2">
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">Add to cart</a>
+                        <a href="<c:url value="/cart/add.do?id=${param.pid}&op=add"/>" class="primary-btn">Add to cart</a>
                     </div>
                 </div>
             </div>

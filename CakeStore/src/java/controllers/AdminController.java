@@ -6,12 +6,11 @@
 package controllers;
 
 import db.DBContext;
-import db.ProductsFacade;
-import entity.Products;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author vuhai
  */
-@WebServlet(name = "ShopController", urlPatterns = {"/shop"})
-public class ShopController extends HttpServlet {
+@WebServlet(name = "AdminController", urlPatterns = {"/admin"})
+public class AdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,8 +39,8 @@ public class ShopController extends HttpServlet {
         String controller = (String) request.getAttribute("controller");
         String action = (String) request.getAttribute("action");
         switch (action) {
-            case "shop":
-                list(request, response);
+            case "index":
+                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
             default:
                 request.setAttribute("controller", "error");
@@ -49,41 +48,6 @@ public class ShopController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
         }
-    }
-
-    protected void list(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String search = request.getParameter("search");
-        String category = request.getParameter("category");
-        String sort = request.getParameter("sort");
-        if (sort == null || sort == "") {sort = "name";}
-        ProductsFacade pf = new ProductsFacade();
-        String index = request.getParameter("index");
-        if (search == null) {search = category = "";index = "1";}
-        try {
-            //Category
-            List<String> categories = pf.getCategory();
-            request.setAttribute("categories", categories);
-
-            //Page
-            int pageSize = 8;
-            int endPage = 0;
-            int count = pf.getCount(search, category);
-            endPage = count / pageSize;
-            if (count % pageSize != 0) {
-                endPage++;
-            }
-
-            //Get Products
-            List<Products> list = pf.getProduct(search, category, sort, Integer.parseInt(index), pageSize);
-            request.setAttribute("list", list);
-            request.setAttribute("count", count);
-            request.setAttribute("pageSize", pageSize);
-            request.setAttribute("end", endPage);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
