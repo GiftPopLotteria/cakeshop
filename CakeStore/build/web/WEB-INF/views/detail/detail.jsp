@@ -69,12 +69,17 @@
                         <li>Tags: <span>${detail.tags}</span></li>
                     </ul>
                     <div class="product__details__option">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="2">
+                        <form action="<c:url value="/cart/add.do"/>" method="get">
+                            <input type="hidden" value="${param.pid}" name="id">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <span class="dec qtybtn"><a>-</a></span>
+                                    <input type="text" value="1" name="quantity">
+                                    <span class="inc qtybtn"><a>+</a></span>
+                                </div>
                             </div>
-                        </div>
-                        <a href="<c:url value="/cart/add.do?id=${param.pid}&op=add"/>" class="primary-btn">Add to cart</a>
+                            <button style="border: none" type="submit" class="primary-btn">Add to cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -146,7 +151,7 @@
             <div class="related__products__slider owl-carousel">
                 <div class="col-lg-3">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-1.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<c:url value="/img/shop/product-1.jpg" />">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -162,7 +167,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-2.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<c:url value="/img/shop/product-2.jpg" />">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -178,7 +183,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-3.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<c:url value="/img/shop/product-3.jpg" />">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -194,7 +199,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-4.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<c:url value="/img/shop/product-4.jpg" />">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -210,7 +215,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-5.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<c:url value="/img/shop/product-5.jpg" />">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -226,7 +231,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-6.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<c:url value="/img/shop/product-6.jpg" />">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>

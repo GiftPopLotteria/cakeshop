@@ -8,14 +8,19 @@ package controllers;
 import db.CouponFacade;
 import db.DBContext;
 import db.ProductsFacade;
+import db.UserOrderFacade;
 import entity.Cart;
 import entity.Item;
 import entity.Products;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -156,8 +161,10 @@ public class CartController extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
         try {
             CouponFacade cf = new CouponFacade();
-            String discount = cf.getCoupon(coupon);
-            request.setAttribute("coupon", discount);
+            double discount = Double.parseDouble(cf.getCoupon(coupon)) * cart.getTotal(); // convert to decimal percentage
+            DecimalFormat df = new DecimalFormat("#.##");
+            discount = Double.parseDouble(df.format(discount));
+            request.setAttribute("discount", discount);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -167,18 +174,41 @@ public class CartController extends HttpServlet {
 
     protected void checkout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //1.Neu user chua login thi bat login
-        //2.Luu thong tin gio hang vao hai tables: OrderHeader & OrderDetail
-        //3.[Thuc hien thanh toan]
-        //4.Xoa sach cart
-        //5.Quay ve trang chu
-        //Lay cart tu session
         HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute("cart");
-        //Xoa gio hang
-        cart.empty();
-        //Quay ve home page
-        request.getRequestDispatcher("/cart/cart.do").forward(request, response);
+        User user = (User) session.getAttribute("user");
+
+        if (session != null && user != null) {
+            try {
+                String email = user.getEmail();
+                Cart cart = (Cart) session.getAttribute("cart");
+
+                // Extract the product IDs and quantities from the cart
+                List<Integer> productIds = new ArrayList<>();
+                List<Integer> quantities = new ArrayList<>();
+
+                for (Item item : cart.getItems()) {
+                    productIds.add(item.getProducts().getId());
+                    quantities.add(item.getQuantity());
+                }
+
+                // Create the order using UserOrderFacade
+                UserOrderFacade uof = new UserOrderFacade();
+                uof.create(email, productIds, quantities);
+
+                // Clear the cart
+                cart.empty();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            // Redirect the user to a "thank you" page
+            request.setAttribute("controller", "cart");
+            request.setAttribute("action", "thanks");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        } else {
+            // If the user is not logged in, redirect them to the login page
+            request.getRequestDispatcher("/user/login.do").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

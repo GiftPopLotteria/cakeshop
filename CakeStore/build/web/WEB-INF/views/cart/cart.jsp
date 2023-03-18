@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="item" items="${sessionScope.cart.items}" >
+                            <c:forEach var="item" items="${sessionScope.cart.items}">
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
@@ -47,11 +47,16 @@
                                         </div>
                                     </td>
                                     <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="${item.quantity}">
+                                        <form action="<c:url value='/cart/update.do'/>" method="post">
+                                            <input type="hidden" name="id" value="${item.products.id}">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <span class="dec qtybtn"><a style="color: black;" href="<c:url value='/cart/update.do?id=${item.products.id}&quantity=${item.quantity-1}'/>">-</a></span>
+                                                    <input type="number" name="quantity" value="${item.quantity}" onchange="updateQuantity(this)">
+                                                    <span class="inc qtybtn"><a style="color: black;" href="<c:url value='/cart/update.do?id=${item.products.id}&quantity=${item.quantity+1}'/>">+</a></span>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </td>
                                     <td class="cart__price">${item.cost}</td>
                                     <td class="cart__close"><a style="color: black;" href="<c:url value="/cart/delete.do?&id=${item.products.id}"/>">X</a></td>
@@ -68,7 +73,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="continue__btn update__btn">
-                            <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                            <a href="<c:url value="/cart/empty.do"/>"><i class="fa fa-remove"></i> Empty Cart</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +81,7 @@
             <div class="col-lg-4">
                 <div class="cart__discount">
                     <h6>Discount codes</h6>
-                    <form action="<c:url value="/cart/coupon.do"/>">
+                    <form action="<c:url value="/cart/coupon.do"/>" method="post">
                         <input type="text" placeholder="Coupon code" name="coupon" value="${param.coupon}">
                         <button type="submit">Apply</button>
                     </form>
@@ -84,11 +89,12 @@
                 <div class="cart__total">
                     <h6>Cart total</h6>
                     <ul>
-                        <li>Subtotal <span>$ ${sessionScope.cart.total}</span></li>
-                        <li>Discount <span>- $ ${coupon*sessionScope.cart.total}</span></li>
-                        <li>Total <span>$ ${sessionScope.cart.total*(1-coupon)}</span></li>
+                        <li>Subtotal <span>$ ${sessionScope.cart.total-0}</span></li>
+                        <li>Discount <span>- $ ${discount-0}</span></li>
+                        <li><span>${param.coupon}</span></li>
+                        <li>Total <span>$ ${sessionScope.cart.total-discount}</span></li>
                     </ul>
-                    <a href="#" class="primary-btn">Proceed to checkout</a>
+                    <a href="<c:url value="/cart/checkout.do?coupon=${param.coupon}"/>" class="primary-btn">Proceed to checkout</a>
                 </div>
             </div>
         </div>

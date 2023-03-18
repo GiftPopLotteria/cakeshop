@@ -1,5 +1,6 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Blog Hero Begin -->
-<div class="blog-hero set-bg" data-setbg="img/blog/details/blog-hero.jpg">
+<div class="blog-hero set-bg" data-setbg="<c:url value="/img/blog/details/blog-hero.jpg" />">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-7">
@@ -31,25 +32,25 @@
                         <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
                     </div>
                     <div class="blog__details__text">
-                        <p>The cast brass and cast stainless steel burners have the smallest burrs — by far. This
+                        <p>The cast brass and cast stainless steel burners have the smallest burrs  by far. This
                             will mean less chaos in the gas flow, fewer trapped particulate matter in the burner and
                             a cleaner burning grill. The following comparison shows how the ports are formed.</p>
                         <p>Why is port formation important? Several reasons. If the hole is punched into a sheet
-                            metal burner, it leaves a large tab inside the burner that will caus e more chaos while
+                            metal burner, it leaves a large tab inside the burner that will  e more chaos while
                             burning. It is more apt to hold trapped food particles and grease, and is therefore more
                             likely to burn through. (Note the Alfresco burner photo below.</p>
                     </div>
                     <div class="blog__details__recipe">
                         <div class="blog__details__recipe__item">
-                            <h6><img src="img/blog/details/user.png" alt=""> SERVES</h6>
+                            <h6><img src="<c:url value="/img/blog/details/user.png" />" alt=""> SERVES</h6>
                             <span>2 as a main, 4 as a side</span>
                         </div>
                         <div class="blog__details__recipe__item">
-                            <h6><img src="img/blog/details/clock.png" alt=""> PREP TIME</h6>
+                            <h6><img src="<c:url value="/img/blog/details/clock.png" />" alt=""> PREP TIME</h6>
                             <span>15 minute</span>
                         </div>
                         <div class="blog__details__recipe__item">
-                            <h6><img src="img/blog/details/clock.png" alt=""> COOK TIME</h6>
+                            <h6><img src="<c:url value="/img/blog/details/clock.png" />" alt=""> COOK TIME</h6>
                             <span>15 minute</span>
                         </div>
                     </div>
@@ -74,7 +75,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="blog__details__ingredients__pic">
-                                    <img src="img/blog/details/blog-details.jpg" alt="">
+                                    <img src="<c:url value="/img/blog/details/blog-details.jpg" />" alt="">
                                 </div>
                             </div>
                         </div>
@@ -85,16 +86,16 @@
                             <li><span>01.</span> Combine all of the ingredients, kneading to form a smooth dough.
                             </li>
                             <li><span>02.</span> Allow the dough to rise, in a lightly greased, covered bowl, until
-                                it’s doubled in size,</li>
+                                time doubled in size,</li>
                             <li><span>03.</span> about 90 minutes.</li>
-                            <li><span>04.</span> Gently divide the dough in half; it’ll deflate somewhat. Gently
-                                shape the dough into two oval loaves; or, for longer loaves, two 10″ to 11″ logs.
+                            <li><span>04.</span> Gently divide the dough in half deflate somewhat. Gently
+                                shape the dough into two oval loaves; or, for longer loaves, two 100 to 110  logs.
                             </li>
                             <li><span>05.</span> Place the loaves on a lightly greased or parchment-lined baking
                                 sheet. Cover and let</li>
                             <li><span>06.</span> rise until very puffy, about 1 hour. Towards the end of the rising
                                 time, preheat the oven</li>
-                            <li><span>07.</span> to 425°F.</li>
+                            <li><span>07.</span> to 425�F.</li>
                             <li><span>08.</span> Spray the loaves with lukewarm water. Make two fairly deep diagonal
                                 slashes in each; a serrated bread knife, wielded firmly,</li>
                         </ul>
@@ -134,7 +135,7 @@
                     </div>
                     <div class="blog__details__author">
                         <div class="blog__details__author__pic">
-                            <img src="img/blog/details/blog-author.jpg" alt="">
+                            <img src="<c:url value="/img/blog/details/blog-author.jpg" />" alt="">
                         </div>
                         <div class="blog__details__author__text">
                             <h6>Mitchell Holland</h6>
@@ -153,7 +154,7 @@
                         <a href="#" class="primary-btn">Leave a comment</a>
                         <div class="blog__details__comment__item">
                             <div class="blog__details__comment__item__pic">
-                                <img src="img/blog/details/comment-1.jpg" alt="">
+                                <img src="<c:url value="/img/blog/details/comment-1.jpg" />" alt="">
                             </div>
                             <div class="blog__details__comment__item__text">
                                 <h6>Dylan Stewart</h6>
@@ -168,7 +169,7 @@
                         </div>
                         <div class="blog__details__comment__item blog__details__comment__item--reply">
                             <div class="blog__details__comment__item__pic">
-                                <img src="img/blog/details/comment-2.jpg" alt="">
+                                <img src="<c:url value="/img/blog/details/comment-2.jpg" />" alt="">
                             </div>
                             <div class="blog__details__comment__item__text">
                                 <h6>Derrick Patrick</h6>
@@ -183,7 +184,7 @@
                         </div>
                         <div class="blog__details__comment__item">
                             <div class="blog__details__comment__item__pic">
-                                <img src="img/blog/details/comment-3.jpg" alt="">
+                                <img src="<c:url value="/img/blog/details/comment-3.jpg" />" alt="">
                             </div>
                             <div class="blog__details__comment__item__text">
                                 <h6>Michael Luna</h6>

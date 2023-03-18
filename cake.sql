@@ -52,12 +52,12 @@ CREATE TABLE Users (
 );
 GO
 
--- Create Orders table
-RAISERROR('Creating Table Orders....',0,1)
-CREATE TABLE [Order] (
+-- Create UserOrder table
+RAISERROR('Creating Table UserOrder....',0,1)
+CREATE TABLE UserOrder (
     id INT IDENTITY(1,1) PRIMARY KEY,
     user_id VARCHAR(50) NOT NULL,
-    order_date DATETIME NOT NULL,
+    order_date DATE NOT NULL DEFAULT GETDATE(),
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 GO
@@ -69,7 +69,7 @@ CREATE TABLE OrderItem (
     order_id INT NOT NULL,
     product_id INT NOT NULL,
     quantity INT NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES [Order](id),
+    FOREIGN KEY (order_id) REFERENCES UserOrder(id),
     FOREIGN KEY (product_id) REFERENCES Products(id)
 );
 GO
@@ -107,8 +107,24 @@ go
 raiserror('Insert Table Coupon....',0,1)
 GO
 INSERT INTO Coupon(id, code, discount, expiration_date)
-VALUES (2, 'SALE10', 0.10, '2023-04-30');
+VALUES (2, 'SALE10', 0.10, '2023-04-30'),
+		(1, 'FPTSTUDENCOUPON50%', 0.10, '2023-04-30');
 
+
+-- Populate the Users table
+raiserror('Insert Table Users....',0,1)
+GO
+INSERT INTO Users (id, name, email, password, roleid)
+VALUES ('u101', 'John Doe', 'john.doe@email.com', 'johndoe123', 'User'),
+('vuhainam272', 'Hai Nam', 'vuhainam272@gmail.com', '1', 'Admin'),
+('admin', 'Admin', 'admin@gmail.com', '1', 'Admin');
+go
+
+-- Populate the UserOrder table
+raiserror('Insert Table UserOrder....',0,1)
+GO
+INSERT INTO UserOrder (user_id)
+VALUES ('admin');
 
 -- Populate the Products table
 raiserror('Insert Table Products....',0,1)

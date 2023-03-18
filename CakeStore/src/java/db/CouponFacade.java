@@ -26,10 +26,10 @@ public class CouponFacade {
         ResultSet rs = stm.executeQuery();
         // If there is at least one row in the result set, return the discount value
         while (rs.next()) {
-            return rs.getString(1);
+            return rs.getString("discount");
         }
-        // If there are no rows in the result set, return null or throw an exception
-        return rs.getString(1); // This line will never be executed because the previous line returns from the method
+        // If there are no rows in the result set, return null
+        return null;
     }
 
 }

@@ -53,7 +53,7 @@
                 </div>
                 <div class="offcanvas__cart__item">
                     <a href="<c:url value="/cart/cart.do"/>"><img src="<c:url value="/img/icon/cart.png"/>" alt=""></a>
-                    <div class="cart__price">Cart: <span>$0.00</span></div>
+                    <div class="cart__price">Cart: <span>$ ${sessionScope.cart.total-0}</span></div>
                 </div>
             </div>
             <div class="offcanvas__logo">
@@ -104,7 +104,7 @@
                                             <li><a>Welcome ${user.name} !</a></li>
                                             <li><a href="<c:url value="/user/logout.do" />">LOG OUT</a></span></li>
                                             <li><a href="<c:url value="/admin/index.do" />">${user.roleId=="Admin"?"MANAGER":""}</a></li>
-                                        </c:if>
+                                            </c:if>
 
 
                                     </ul>
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="header__top__right__cart">
                                         <a href="<c:url value="/cart/cart.do"/>"><img src="<c:url value="/img/icon/cart.png"/>" alt=""></a>
-                                        <div class="cart__price">Cart: <span>$0.00</span></div>
+                                        <div class="cart__price">Cart: <span>$ ${sessionScope.cart.total}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -138,11 +138,9 @@
                                 <li><a href="<c:url value="/shop/shop.do?index=1&currency=${param.currency!="vnd"?"usd":"vnd"}"/>">Shop</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                        <li><a href="./checkout.html">Check Out</a></li>
+                                        <li><a href="<c:url value="/cart/cart.do"/>">Shoping Cart</a></li>
                                         <li><a href="./wisslist.html">Wisslist</a></li>
                                         <li><a href="<c:url value="/cakestore/class.do"/>">Class</a></li>
-                                        <li><a href="<c:url value="/cakestore/blog-details.do"/>">Blog Details</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="<c:url value="/cakestore/blog.do"/>">Blog</a></li>
@@ -214,7 +212,7 @@
                                 <ul>
                                     <li><a href="#">Privacy Policy</a></li>
                                     <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Site Map</a></li>
+                                    <li><a href="https://www.google.com/maps/dir//fpt+hcm+map/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x31752731176b07b1:0xb752b24b379bae5e?sa=X&ved=2ahUKEwjvtM-Dx-L9AhVYTWwGHQ6bBtQQ9Rd6BAhYEAU">Site Map</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -249,6 +247,6 @@
         <script src="<c:url value="/js/jquery.nicescroll.min.js" />"></script>
         <script src="<c:url value="/js/main.js" />"></script>
         <script src="<c:url value="/js/login.js" />"></script>
-
+        <script src="<c:url value="/js/cart.js" />"></script>
     </body>
 </html>

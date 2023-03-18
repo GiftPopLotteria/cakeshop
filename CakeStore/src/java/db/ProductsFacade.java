@@ -90,6 +90,7 @@ public class ProductsFacade {
         while (rs.next()) {
             categories.add(rs.getString("category"));
         }
+        con.close();
         return categories;
     }
 
@@ -106,6 +107,7 @@ public class ProductsFacade {
         while (rs.next()) {
             return rs.getInt(1);
         }
+        con.close();
         return 0;
     }
 
@@ -116,7 +118,7 @@ public class ProductsFacade {
         Connection con = DBContext.getConnection();
         //Tạo đối tượng PreparedStatement
         PreparedStatement stm = con.prepareStatement(""
-                + "with x as (select ROW_NUMBER()over (order by "+sort+" asc) as row,* from Products where name like ? and category like ?)\n"
+                + "with x as (select ROW_NUMBER()over (order by " + sort + " asc) as row,* from Products where name like ? and category like ?)\n"
                 + "select * from x where row between ? and ?");
         stm.setString(1, "%" + search + "%");
         stm.setString(2, "%" + category + "%");
@@ -139,4 +141,51 @@ public class ProductsFacade {
         return list;
     }
 
+//Cake Manager
+    //Get Product 
+    public List<Products> getProduct() throws SQLException {
+        List<Products> list = null;
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM Products");
+        //Thực thi lệnh sql
+        ResultSet rs = stm.executeQuery();
+        //Load dữ liệu vào đối tượng toy nếu có
+        list = new ArrayList<>();
+        while (rs.next()) {
+            Products products = new Products();
+            products.setId(rs.getInt("id"));
+            products.setName(rs.getString("name"));
+            products.setPrice(rs.getDouble("price"));
+            products.setCategory(rs.getString("category"));
+            products.setTags(rs.getString("tags"));
+            list.add(products);
+        }
+        con.close();
+        return list;
+    }
+
+    public void create(Products products) throws SQLException {
+        //Tạo connection để kết nối vào DBMS
+        Connection con = DBContext.getConnection();
+        //Tạo đối tượng PreparedStatement
+        PreparedStatement stm = con.prepareStatement("insert Products values(?,?,?,?,?,?,?,?,?,?,?)");
+        stm.setString(1, products.getName());
+        stm.setString(2, products.getDescription());
+        stm.setDouble(3, products.getPrice());
+        stm.setString(4, products.getCategory());
+        stm.setString(5, products.getImage());
+        stm.setString(6, products.getTags());
+        stm.setString(7, products.getImage1());
+        stm.setString(8, products.getImage2());
+        stm.setString(9, products.getImage3());
+        stm.setString(10, products.getImage4());
+        stm.setString(11, products.getImage5());
+
+        //Thực thi lệnh sql
+        int count = stm.executeUpdate();
+        //Đóng kết nối
+        con.close();
+    }
 }

@@ -40,7 +40,7 @@
                         <p>Herbs are fun and easy to grow. When harvested they make even the simplest meal seem like
                             a gourmet delight. By using herbs in your cooking you can easily change the flavors of
                             your recipes in many different ways, according to which herbs you add...</p>
-                        <a href="#">READ MORE</a>
+                        <a href="<c:url value="/cakestore/blog-details.do" />">READ MORE</a>
                     </div>
                 </div>
                 <div class="blog__item">
@@ -59,7 +59,7 @@
                         <p>Herbs are fun and easy to grow. When harvested they make even the simplest meal seem like
                             a gourmet delight. By using herbs in your cooking you can easily change the flavors of
                             your recipes in many different ways, according to which herbs you add...</p>
-                        <a href="#">READ MORE</a>
+                        <a href="<c:url value="/cakestore/blog-details.do" />">READ MORE</a>
                     </div>
                 </div>
                 <div class="blog__item">
@@ -78,7 +78,7 @@
                         <p>Herbs are fun and easy to grow. When harvested they make even the simplest meal seem like
                             a gourmet delight. By using herbs in your cooking you can easily change the flavors of
                             your recipes in many different ways, according to which herbs you add...</p>
-                        <a href="#">READ MORE</a>
+                        <a href="<c:url value="/cakestore/blog-details.do" />">READ MORE</a>
                     </div>
                 </div>
                 <div class="blog__item">
@@ -97,7 +97,7 @@
                         <p>Herbs are fun and easy to grow. When harvested they make even the simplest meal seem like
                             a gourmet delight. By using herbs in your cooking you can easily change the flavors of
                             your recipes in many different ways, according to which herbs you add...</p>
-                        <a href="#">READ MORE</a>
+                        <a href="<c:url value="/cakestore/blog-details.do" />">READ MORE</a>
                     </div>
                 </div>
                 <div class="shop__pagination">

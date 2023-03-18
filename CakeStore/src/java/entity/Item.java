@@ -41,4 +41,8 @@ public class Item {
     public double getCost() {
         return this.quantity * this.getProducts().getPrice();
     }
+
+    public Object getProduct() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
